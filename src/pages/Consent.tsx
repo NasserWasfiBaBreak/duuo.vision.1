@@ -65,80 +65,80 @@ export default function Consent() {
           <div className="bg-white rounded-2xl shadow-2xl overflow-hidden animate-fadeInUp flex-1 flex flex-col" style={{ animationDelay: '0.2s' }}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-0 flex-1 overflow-hidden">
               {/* Left Column - Key Visual Points */}
-              <div className="bg-gradient-to-br from-ford-blue to-ford-lightblue text-white p-6 flex flex-col justify-between overflow-y-auto">
+              <div className="bg-gradient-to-br from-ford-blue to-ford-lightblue text-white p-4 sm:p-6 flex flex-col justify-between overflow-y-auto max-h-[50vh] md:max-h-none">
                 <div>
-                  <div className="mb-6">
-                    <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mb-3">
-                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="mb-3 sm:mb-4">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-full flex items-center justify-center mb-2">
+                      <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                       </svg>
                     </div>
-                    <h3 className="text-xl font-bold mb-2">Your Privacy is Protected</h3>
-                    <p className="text-white/90 text-sm">We are committed to protecting your personal information in accordance with our privacy policy.</p>
+                    <h3 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2">Your Privacy is Protected</h3>
+                    <p className="text-white/90 text-xs sm:text-sm">We are committed to protecting your personal information in accordance with our privacy policy.</p>
                   </div>
 
-                  <div className="space-y-4">
+                  <div className="space-y-2 sm:space-y-3">
                     <div className="flex gap-2">
                       <div className="flex-shrink-0 mt-0.5">
-                        <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                         </svg>
                       </div>
                       <div>
-                        <h4 className="font-semibold text-sm mb-1">Transparent Process</h4>
-                        <p className="text-xs text-white/80">Clear information about how we use your data</p>
+                        <h4 className="font-semibold text-xs sm:text-sm mb-0.5">Transparent Process</h4>
+                        <p className="text-[10px] sm:text-xs text-white/80">Clear information about how we use your data</p>
                       </div>
                     </div>
 
                     <div className="flex gap-2">
                       <div className="flex-shrink-0 mt-0.5">
-                        <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                         </svg>
                       </div>
                       <div>
-                        <h4 className="font-semibold text-sm mb-1">Your Control</h4>
-                        <p className="text-xs text-white/80">Withdraw consent anytime with reasonable notice</p>
+                        <h4 className="font-semibold text-xs sm:text-sm mb-0.5">Your Control</h4>
+                        <p className="text-[10px] sm:text-xs text-white/80">Withdraw consent anytime with reasonable notice</p>
                       </div>
                     </div>
 
                     <div className="flex gap-2">
                       <div className="flex-shrink-0 mt-0.5">
-                        <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                         </svg>
                       </div>
                       <div>
-                        <h4 className="font-semibold text-sm mb-1">Fraud Prevention</h4>
-                        <p className="text-xs text-white/80">Your information helps us maintain service integrity</p>
+                        <h4 className="font-semibold text-xs sm:text-sm mb-0.5">Fraud Prevention</h4>
+                        <p className="text-[10px] sm:text-xs text-white/80">Your information helps us maintain service integrity</p>
                       </div>
                     </div>
 
                     <div className="flex gap-2">
                       <div className="flex-shrink-0 mt-0.5">
-                        <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                         </svg>
                       </div>
                       <div>
-                        <h4 className="font-semibold text-sm mb-1">60-Day Auto-Delete</h4>
-                        <p className="text-xs text-white/80">Unproceed quotes are automatically deleted</p>
+                        <h4 className="font-semibold text-xs sm:text-sm mb-0.5">60-Day Auto-Delete</h4>
+                        <p className="text-[10px] sm:text-xs text-white/80">Unproceed quotes are automatically deleted</p>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-4 pt-4 border-t border-white/20">
-                  <p className="text-xs text-white/70">
+                <div className="mt-2 sm:mt-4 pt-2 sm:pt-4 border-t border-white/20">
+                  <p className="text-[10px] sm:text-xs text-white/70">
                     🔒 Co-operators General Insurance Company
                   </p>
                 </div>
               </div>
 
               {/* Right Column - Consent Text with Scroll */}
-              <div className="p-6 flex flex-col overflow-hidden">
+              <div className="p-4 sm:p-6 flex flex-col overflow-hidden">
                 {/* Scrollable Consent Text */}
-                <div className="flex-1 overflow-y-auto mb-4 pr-2 custom-scrollbar">
+                <div className="flex-1 overflow-y-auto mb-3 sm:mb-4 pr-2 custom-scrollbar">
                   <div className="mb-4">
                     <p className="text-gray-700 leading-relaxed mb-3 text-sm">
                       <strong>Co-operators General Insurance Company ("Co-operators")</strong>, collects, uses, and discloses the personal information provided by you, and by third parties, to assess your insurance needs, offer you an insurance quote, analyze the use of this quote service, and prevent fraud, in accordance with Co-operators' privacy policy.
@@ -161,32 +161,32 @@ export default function Consent() {
                 </div>
 
                 {/* Checkbox - Fixed at Bottom */}
-                <div className="flex-shrink-0 mb-4">
-                  <label className="flex items-start cursor-pointer group bg-gray-50 hover:bg-gray-100 p-3 rounded-lg transition-colors">
+                <div className="flex-shrink-0 mb-2 sm:mb-3">
+                  <label className="flex items-start cursor-pointer group bg-gray-50 hover:bg-gray-100 p-2 sm:p-3 rounded-lg transition-colors">
                     <input
                       type="checkbox"
                       checked={agreed}
                       onChange={(e) => setAgreed(e.target.checked)}
                       className="mt-1 h-4 w-4 text-ford-blue border-gray-300 rounded focus:ring-ford-blue focus:ring-2 cursor-pointer flex-shrink-0"
                     />
-                    <span className="ml-2 text-gray-700 font-medium text-sm">
+                    <span className="ml-2 text-gray-700 font-medium text-xs sm:text-sm">
                       I agree to the consent terms outlined above and authorize Co-operators to collect, use, and disclose my personal information as described.
                     </span>
                   </label>
                 </div>
 
                 {/* Action Buttons - Fixed at Bottom */}
-                <div className="flex gap-3 flex-shrink-0">
+                <div className="flex gap-2 sm:gap-3 flex-shrink-0">
                   <button
                     onClick={() => navigate('/')}
-                    className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 border border-gray-300 text-sm"
+                    className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 sm:py-2.5 px-3 sm:px-4 rounded-lg transition-all duration-200 border border-gray-300 text-xs sm:text-sm"
                   >
                     ← Back
                   </button>
                   <button
                     onClick={handleContinue}
                     disabled={!agreed}
-                    className={`flex-1 font-semibold py-2.5 px-4 rounded-lg transition-all duration-300 text-sm ${
+                    className={`flex-1 font-semibold py-2 sm:py-2.5 px-3 sm:px-4 rounded-lg transition-all duration-300 text-xs sm:text-sm ${
                       agreed
                         ? 'bg-ford-blue hover:bg-ford-darkblue text-white shadow-lg hover:shadow-xl transform hover:scale-105'
                         : 'bg-gray-300 text-gray-500 cursor-not-allowed'
