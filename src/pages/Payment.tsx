@@ -89,12 +89,12 @@ export default function Payment() {
 
         <div className="max-w-6xl mx-auto text-center relative z-10">
           <div className="animate-fadeInUp">
-            <h1 className="text-6xl md:text-8xl font-bold mb-4 tracking-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-3 sm:mb-4 tracking-tight">
               DUUO
             </h1>
-            <div className="h-1 w-32 bg-white mx-auto mb-8"></div>
+            <div className="h-0.5 sm:h-1 w-20 sm:w-24 md:w-32 bg-white mx-auto mb-6 sm:mb-8"></div>
           </div>
-          <p className="text-2xl md:text-3xl font-light mb-4 animate-fadeInUp" style={{ animationDelay: '0.2s' }}>
+          <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light mb-3 sm:mb-4 animate-fadeInUp px-2" style={{ animationDelay: '0.2s' }}>
             Complete Your Payment
           </p>
           <p className="text-lg text-white/80 animate-fadeInUp" style={{ animationDelay: '0.3s' }}>
@@ -144,7 +144,7 @@ export default function Payment() {
             {/* Payment Frequency Selection */}
             <div className="mb-8">
               <h3 className="text-2xl font-bold text-gray-800 mb-4">Choose Payment Frequency</h3>
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
                 {/* Yearly Payment */}
                 <div
                   onClick={() => setPaymentFrequency('yearly')}
@@ -222,7 +222,7 @@ export default function Payment() {
             <div className="mb-8">
               <h3 className="text-2xl font-bold text-gray-800 mb-4">Choose Payment Method</h3>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 mb-6">
                 {/* Apple Pay */}
                 <button
                   onClick={() => setSelectedPaymentMethod('apple')}

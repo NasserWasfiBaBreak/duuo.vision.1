@@ -55,7 +55,7 @@ export default function Consent() {
         <div className="max-w-5xl w-full h-full flex flex-col py-4">
           {/* Header */}
           <div className="text-center mb-4 animate-fadeInUp flex-shrink-0">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-2 px-2">
               Do you agree to consent?
             </h2>
             <div className="h-1 w-24 bg-ford-blue mx-auto"></div>
@@ -63,7 +63,7 @@ export default function Consent() {
 
           {/* Main Content Card - Flexible Height */}
           <div className="bg-white rounded-2xl shadow-2xl overflow-hidden animate-fadeInUp flex-1 flex flex-col" style={{ animationDelay: '0.2s' }}>
-            <div className="grid md:grid-cols-2 gap-0 flex-1 overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-0 flex-1 overflow-hidden">
               {/* Left Column - Key Visual Points */}
               <div className="bg-gradient-to-br from-ford-blue to-ford-lightblue text-white p-6 flex flex-col justify-between overflow-y-auto">
                 <div>

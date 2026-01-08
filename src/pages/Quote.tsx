@@ -412,14 +412,14 @@ export default function Quote() {
         <div className="flex-1 pt-24 pb-12 px-4 flex items-center justify-center">
           <div className="max-w-4xl w-full">
             <div className="text-center mb-12 animate-fadeInUp">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-3 sm:mb-4 px-2">
                 How would you like to get started?
               </h2>
               <div className="h-1 w-24 bg-ford-blue mx-auto mb-4"></div>
               <p className="text-gray-600 text-lg">Choose your preferred method to provide your information</p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8 animate-fadeInUp" style={{ animationDelay: '0.2s' }}>
+            <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 animate-fadeInUp" style={{ animationDelay: '0.2s' }}>
               {/* Scan License Option */}
               <div
                 onClick={handleScanLicense}
@@ -548,25 +548,25 @@ export default function Quote() {
       </nav>
 
       {/* Hero Section with Ford Branding - Same as Landing */}
-      <div className="relative bg-gradient-to-br from-ford-darkblue via-ford-blue to-ford-lightblue text-white py-32 px-4 overflow-hidden">
+      <div className="relative bg-gradient-to-br from-ford-darkblue via-ford-blue to-ford-lightblue text-white py-20 sm:py-24 md:py-32 lg:py-40 px-4 overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-white/5 rounded-full blur-3xl animate-pulse-slow"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-white/5 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute top-20 left-10 w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 bg-white/5 rounded-full blur-3xl animate-pulse-slow"></div>
+          <div className="absolute bottom-20 right-10 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-white/5 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-1/2 left-1/2 w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 bg-white/5 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
         </div>
 
         <div className="max-w-6xl mx-auto text-center relative z-10">
           <div className="animate-fadeInUp">
-            <h1 className="text-6xl md:text-8xl font-bold mb-4 tracking-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-3 sm:mb-4 tracking-tight">
               DUUO
             </h1>
-            <div className="h-1 w-32 bg-white mx-auto mb-8"></div>
+            <div className="h-0.5 sm:h-1 w-20 sm:w-24 md:w-32 bg-white mx-auto mb-6 sm:mb-8"></div>
           </div>
-          <p className="text-2xl md:text-3xl font-light mb-4 animate-fadeInUp" style={{ animationDelay: '0.2s' }}>
+          <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light mb-3 sm:mb-4 animate-fadeInUp px-2" style={{ animationDelay: '0.2s' }}>
             Get Your Insurance Quote
           </p>
-          <p className="text-lg text-white/80 animate-fadeInUp" style={{ animationDelay: '0.3s' }}>
+          <p className="text-base sm:text-lg text-white/80 animate-fadeInUp px-2" style={{ animationDelay: '0.3s' }}>
             Step {currentStep} of 3: {stepLabels[currentStep - 1]}
           </p>
         </div>
@@ -623,7 +623,7 @@ export default function Quote() {
                   <h3 className="text-xl font-semibold text-gray-800 mb-6">
                     Personal Information
                   </h3>
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
                     <InputField
                       label="First Name"
                       name="firstName"
@@ -648,7 +648,7 @@ export default function Quote() {
                     required
                     max={new Date().toISOString().split('T')[0]}
                   />
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
                     <InputField
                       label="Email Address"
                       name="email"
@@ -678,7 +678,7 @@ export default function Quote() {
                     onChange={handleInputChange}
                     required
                   />
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
                     <InputField
                       label="City"
                       name="city"
@@ -715,7 +715,7 @@ export default function Quote() {
                     onChange={handleInputChange}
                     required
                   />
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
                     <SelectField
                       label="License Class"
                       name="licenseClass"
@@ -806,7 +806,7 @@ export default function Quote() {
                                   <div className="space-y-3">
                                     {drivingRecord.claims.map((claim, index) => (
                                       <div key={index} className="bg-orange-50 border border-orange-200 rounded-lg p-3">
-                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-2">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3 mb-2">
                                           <InputField
                                             label="Date"
                                             name={`claim-date-${index}`}
@@ -896,7 +896,7 @@ export default function Quote() {
                                   <div className="space-y-3">
                                     {drivingRecord.violations.map((violation, index) => (
                                       <div key={index} className="bg-red-50 border border-red-200 rounded-lg p-3">
-                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-2">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3 mb-2">
                                           <InputField
                                             label="Date"
                                             name={`violation-date-${index}`}
@@ -988,7 +988,7 @@ export default function Quote() {
                                   <div className="space-y-3">
                                     {drivingRecord.suspensions.map((suspension, index) => (
                                       <div key={index} className="bg-red-100 border border-red-300 rounded-lg p-3">
-                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-2">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3 mb-2">
                                           <InputField
                                             label="Date"
                                             name={`suspension-date-${index}`}
@@ -1072,7 +1072,7 @@ export default function Quote() {
                       <h3 className="text-xl font-semibold text-gray-800 mb-6 text-center">
                         How would you like to enter vehicle information?
                       </h3>
-                      <div className="grid md:grid-cols-2 gap-6">
+                      <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
                         {/* VIN Lookup Option */}
                         <div
                           onClick={() => {
@@ -1248,7 +1248,7 @@ export default function Quote() {
                         </div>
                       )}
 
-                      <div className="grid md:grid-cols-2 gap-6">
+                      <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
                         <InputField
                           label="Year"
                           name="vehicleYear"

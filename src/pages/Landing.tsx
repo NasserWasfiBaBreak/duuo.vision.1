@@ -83,36 +83,36 @@ export default function Landing() {
       </nav>
 
       {/* Hero Section with Video Background Effect */}
-      <div className="relative bg-gradient-to-br from-ford-darkblue via-ford-blue to-ford-lightblue text-white py-32 px-4 overflow-hidden">
+      <div className="relative bg-gradient-to-br from-ford-darkblue via-ford-blue to-ford-lightblue text-white py-20 sm:py-24 md:py-32 lg:py-40 px-4 overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-white/5 rounded-full blur-3xl animate-pulse-slow"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-white/5 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute top-20 left-10 w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 bg-white/5 rounded-full blur-3xl animate-pulse-slow"></div>
+          <div className="absolute bottom-20 right-10 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-white/5 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-1/2 left-1/2 w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 bg-white/5 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
         </div>
 
         <div className="max-w-6xl mx-auto text-center relative z-10">
           <div className="animate-fadeInUp">
-            <h1 className="text-6xl md:text-8xl font-bold mb-4 tracking-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-3 sm:mb-4 tracking-tight">
               DUUO
             </h1>
-            <div className="h-1 w-32 bg-white mx-auto mb-8"></div>
+            <div className="h-0.5 sm:h-1 w-20 sm:w-24 md:w-32 bg-white mx-auto mb-6 sm:mb-8"></div>
           </div>
-          <p className="text-2xl md:text-3xl font-light mb-6 animate-fadeInUp" style={{ animationDelay: '0.2s' }}>
+          <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light mb-4 sm:mb-6 animate-fadeInUp px-2" style={{ animationDelay: '0.2s' }}>
             Premium Insurance Solutions
           </p>
-          <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-10 animate-fadeInUp" style={{ animationDelay: '0.4s' }}>
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 max-w-2xl mx-auto mb-8 sm:mb-10 animate-fadeInUp px-4" style={{ animationDelay: '0.4s' }}>
             Your trusted partner for comprehensive vehicle insurance across Canada
           </p>
           <div className="animate-fadeInUp" style={{ animationDelay: '0.6s' }}>
             <button
               onClick={() => navigate('/consent')}
-              className="bg-white text-ford-blue hover:bg-gray-100 font-bold py-4 px-12 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-2xl text-lg group"
+              className="bg-white text-ford-blue hover:bg-gray-100 font-bold py-3 px-8 sm:py-4 sm:px-12 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-2xl text-base sm:text-lg group"
             >
               Get Your Free Quote
               <span className="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-2">→</span>
             </button>
-            <p className="text-sm mt-4 text-white/70">✓ No credit card required  ✓ 2-minute process  ✓ Instant results</p>
+            <p className="text-xs sm:text-sm mt-3 sm:mt-4 text-white/70 px-2">✓ No credit card required  ✓ 2-minute process  ✓ Instant results</p>
           </div>
         </div>
 
@@ -125,17 +125,17 @@ export default function Landing() {
       </div>
 
       {/* Trust Badges - Animated Stats */}
-      <div className="py-12 px-4 bg-white border-b border-gray-100">
+      <div className="py-8 sm:py-10 md:py-12 px-4 bg-white border-b border-gray-100">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
             {stats.map((stat, index) => (
               <div
                 key={index}
                 className="text-center transform hover:scale-110 transition-transform duration-300"
                 style={{ animation: `fadeInUp 0.8s ease-out ${index * 0.1}s forwards`, opacity: 0 }}
               >
-                <div className="text-4xl md:text-5xl font-bold text-ford-blue mb-2">{stat.number}</div>
-                <div className="text-gray-600 text-sm md:text-base">{stat.label}</div>
+                <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-ford-blue mb-1 sm:mb-2">{stat.number}</div>
+                <div className="text-gray-600 text-xs sm:text-sm md:text-base">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -143,14 +143,14 @@ export default function Landing() {
       </div>
 
       {/* Quick Benefits Section with Hover Effects */}
-      <div className="py-16 px-4 bg-gray-50">
+      <div className="py-12 sm:py-14 md:py-16 lg:py-20 px-4 bg-gray-50">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12 animate-fadeInUp">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          <div className="text-center mb-8 sm:mb-10 md:mb-12 animate-fadeInUp">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-3 sm:mb-4 px-2">
               Get Covered in 3 Simple Steps
             </h2>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {[
               {
                 title: "Quick Quote Process",
@@ -176,17 +176,17 @@ export default function Landing() {
             ].map((benefit, index) => (
               <div
                 key={index}
-                className="text-center p-8 bg-white border-2 border-gray-200 rounded-xl hover:border-ford-blue hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 group cursor-pointer"
+                className="text-center p-6 sm:p-7 md:p-8 bg-white border-2 border-gray-200 rounded-xl hover:border-ford-blue hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 group cursor-pointer"
                 style={{ animation: `fadeInUp 0.8s ease-out ${benefit.delay} forwards`, opacity: 0 }}
               >
-                <div className="text-6xl mb-4 transform group-hover:scale-125 transition-transform duration-300">
+                <div className="text-4xl sm:text-5xl md:text-6xl mb-3 sm:mb-4 transform group-hover:scale-125 transition-transform duration-300">
                   {benefit.icon}
                 </div>
-                <div className="text-ford-blue text-5xl font-bold mb-4 group-hover:text-ford-lightblue transition-colors">
+                <div className="text-ford-blue text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 group-hover:text-ford-lightblue transition-colors">
                   {benefit.time}
                 </div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">{benefit.title}</h3>
-                <p className="text-gray-600">{benefit.description}</p>
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2">{benefit.title}</h3>
+                <p className="text-sm sm:text-base text-gray-600">{benefit.description}</p>
               </div>
             ))}
           </div>
@@ -194,77 +194,77 @@ export default function Landing() {
       </div>
 
       {/* Image/Video Section - Simulated with gradient and car icon */}
-      <div className="py-20 px-4 bg-gradient-to-r from-ford-blue to-ford-lightblue text-white relative overflow-hidden">
+      <div className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 bg-gradient-to-r from-ford-blue to-ford-lightblue text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-0 w-full h-full" style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }}></div>
         </div>
         <div className="max-w-6xl mx-auto text-center relative z-10">
-          <div className="mb-8">
-            <svg className="w-32 h-32 mx-auto mb-6 animate-bounce-slow" fill="currentColor" viewBox="0 0 24 24">
+          <div className="mb-6 sm:mb-8">
+            <svg className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 mx-auto mb-4 sm:mb-6 animate-bounce-slow" fill="currentColor" viewBox="0 0 24 24">
               <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
             </svg>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 px-2">
             Protection You Can Trust
           </h2>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto mb-6 sm:mb-8 px-4">
             We understand that your vehicle is more than just transportation—it's your freedom, your livelihood, and your peace of mind. That's why we're committed to providing coverage that truly protects what matters most.
           </p>
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
-              <div className="text-3xl font-bold mb-2">A+ Rating</div>
-              <div className="text-white/80">Industry Recognition</div>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
+            <div className="bg-white/10 backdrop-blur-sm p-4 sm:p-5 md:p-6 rounded-lg">
+              <div className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">A+ Rating</div>
+              <div className="text-sm sm:text-base text-white/80">Industry Recognition</div>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
-              <div className="text-3xl font-bold mb-2">Licensed</div>
-              <div className="text-white/80">All Provinces</div>
+            <div className="bg-white/10 backdrop-blur-sm p-4 sm:p-5 md:p-6 rounded-lg">
+              <div className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">Licensed</div>
+              <div className="text-sm sm:text-base text-white/80">All Provinces</div>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
-              <div className="text-3xl font-bold mb-2">Fast Claims</div>
-              <div className="text-white/80">Same-Day Processing</div>
+            <div className="bg-white/10 backdrop-blur-sm p-4 sm:p-5 md:p-6 rounded-lg sm:col-span-2 md:col-span-1">
+              <div className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">Fast Claims</div>
+              <div className="text-sm sm:text-base text-white/80">Same-Day Processing</div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Customer Testimonials Carousel */}
-      <div className="py-20 px-4 bg-white">
+      <div className="py-12 sm:py-16 md:py-20 px-4 bg-white">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-ford-blue mb-4">
+          <div className="text-center mb-8 sm:mb-10 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-ford-blue mb-3 sm:mb-4 px-2">
               What Our Customers Say
             </h2>
-            <div className="h-1 w-24 bg-ford-blue mx-auto mb-6"></div>
+            <div className="h-0.5 sm:h-1 w-20 sm:w-24 bg-ford-blue mx-auto mb-4 sm:mb-6"></div>
           </div>
 
-          <div className="relative bg-gray-50 rounded-2xl p-8 md:p-12 shadow-xl">
+          <div className="relative bg-gray-50 rounded-2xl p-6 sm:p-8 md:p-10 lg:p-12 shadow-xl">
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
                 className={`transition-all duration-500 ${
-                  index === activeTestimonial ? 'opacity-100' : 'opacity-0 absolute inset-0 p-12'
+                  index === activeTestimonial ? 'opacity-100' : 'opacity-0 absolute inset-0 p-6 sm:p-8 md:p-10 lg:p-12'
                 }`}
               >
-                <div className="flex justify-center mb-4">
+                <div className="flex justify-center mb-3 sm:mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <svg key={i} className="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg key={i} className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                   ))}
                 </div>
-                <p className="text-xl text-gray-700 text-center mb-6 italic">
+                <p className="text-base sm:text-lg md:text-xl text-gray-700 text-center mb-4 sm:mb-6 italic px-2">
                   "{testimonial.text}"
                 </p>
                 <div className="text-center">
-                  <p className="font-semibold text-ford-blue">{testimonial.name}</p>
-                  <p className="text-gray-500 text-sm">{testimonial.location}</p>
+                  <p className="font-semibold text-ford-blue text-base sm:text-lg">{testimonial.name}</p>
+                  <p className="text-gray-500 text-xs sm:text-sm">{testimonial.location}</p>
                 </div>
               </div>
             ))}
 
-            <div className="flex justify-center gap-2 mt-8">
+            <div className="flex justify-center gap-2 mt-6 sm:mt-8">
               {testimonials.map((_, index) => (
                 <button
                   key={index}
@@ -280,19 +280,19 @@ export default function Landing() {
       </div>
 
       {/* Why Choose DUUO Section with Icons */}
-      <div className="py-20 px-4 bg-gray-50">
+      <div className="py-12 sm:py-16 md:py-20 px-4 bg-gray-50">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-ford-blue mb-4">
+          <div className="text-center mb-10 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-ford-blue mb-3 sm:mb-4 px-2">
               Why Choose DUUO?
             </h2>
-            <div className="h-1 w-24 bg-ford-blue mx-auto mb-6"></div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <div className="h-0.5 sm:h-1 w-20 sm:w-24 bg-ford-blue mx-auto mb-4 sm:mb-6"></div>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4">
               We partner with leading auto agencies across Canada to bring you the best coverage at competitive rates
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {[
               { title: "Competitive Rates", desc: "Access exclusive rates through our extensive network of trusted insurance partners", icon: "M5 13l4 4L19 7" },
               { title: "Complete Protection", desc: "Comprehensive coverage options to protect you, your vehicle, and your loved ones", icon: "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" },
@@ -303,18 +303,18 @@ export default function Landing() {
             ].map((item, index) => (
               <div
                 key={index}
-                className="flex gap-4 bg-white p-6 rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 group"
+                className="flex gap-3 sm:gap-4 bg-white p-4 sm:p-5 md:p-6 rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 group"
               >
                 <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-ford-blue rounded-lg flex items-center justify-center transform group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-ford-blue rounded-lg flex items-center justify-center transform group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">
+                    <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
                     </svg>
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2 group-hover:text-ford-blue transition-colors">{item.title}</h3>
-                  <p className="text-gray-600">{item.desc}</p>
+                  <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-800 mb-1 sm:mb-2 group-hover:text-ford-blue transition-colors">{item.title}</h3>
+                  <p className="text-sm sm:text-base text-gray-600">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -323,19 +323,19 @@ export default function Landing() {
       </div>
 
       {/* Coverage Types Section */}
-      <div className="py-20 px-4 bg-white">
+      <div className="py-12 sm:py-16 md:py-20 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-ford-blue mb-4">
+          <div className="text-center mb-10 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-ford-blue mb-3 sm:mb-4 px-2">
               Coverage Options
             </h2>
-            <div className="h-1 w-24 bg-ford-blue mx-auto mb-6"></div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <div className="h-0.5 sm:h-1 w-20 sm:w-24 bg-ford-blue mx-auto mb-4 sm:mb-6"></div>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4">
               Choose the protection that's right for you and your vehicle
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {[
               { title: "Liability", features: ["Third-party liability", "Legal protection", "Provincial minimum"], popular: false },
               { title: "Collision", features: ["Accident coverage", "Vehicle repairs", "Replacement value"], popular: false },
@@ -344,17 +344,17 @@ export default function Landing() {
             ].map((coverage, index) => (
               <div
                 key={index}
-                className={`bg-white p-6 rounded-xl border-2 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl ${
-                  coverage.popular ? 'border-ford-blue shadow-xl scale-105' : 'border-gray-200'
+                className={`bg-white p-4 sm:p-5 md:p-6 rounded-xl border-2 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl ${
+                  coverage.popular ? 'border-ford-blue shadow-xl sm:scale-105' : 'border-gray-200'
                 }`}
               >
                 {coverage.popular && (
-                  <div className="inline-block bg-ford-blue text-white text-xs px-3 py-1 rounded-full mb-2 animate-pulse-slow">
+                  <div className="inline-block bg-ford-blue text-white text-xs px-2 py-0.5 sm:px-3 sm:py-1 rounded-full mb-2 animate-pulse-slow">
                     MOST POPULAR
                   </div>
                 )}
-                <h3 className="text-xl font-bold text-ford-blue mb-3">{coverage.title}</h3>
-                <ul className="space-y-3 text-sm text-gray-600">
+                <h3 className="text-lg sm:text-xl font-bold text-ford-blue mb-2 sm:mb-3">{coverage.title}</h3>
+                <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-gray-600">
                   {coverage.features.map((feature, i) => (
                     <li key={i} className="flex items-start gap-2">
                       <svg className="w-5 h-5 text-ford-blue mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -371,14 +371,14 @@ export default function Landing() {
       </div>
 
       {/* How It Works Section - Animated Steps */}
-      <div className="py-20 px-4 bg-gradient-to-br from-gray-50 to-white">
+      <div className="py-12 sm:py-16 md:py-20 px-4 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-ford-blue mb-4">
+          <div className="text-center mb-10 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-ford-blue mb-3 sm:mb-4 px-2">
               How It Works
             </h2>
-            <div className="h-1 w-24 bg-ford-blue mx-auto mb-6"></div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <div className="h-0.5 sm:h-1 w-20 sm:w-24 bg-ford-blue mx-auto mb-4 sm:mb-6"></div>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4">
               Getting insured with DUUO is quick and easy
             </p>
           </div>
@@ -387,7 +387,7 @@ export default function Landing() {
             {/* Connection Line */}
             <div className="hidden md:block absolute top-8 left-0 right-0 h-1 bg-gradient-to-r from-ford-blue via-ford-lightblue to-ford-blue" style={{ top: '32px' }}></div>
 
-            <div className="grid md:grid-cols-4 gap-8 relative">
+            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 relative">
               {[
                 { step: 1, title: "Fill Out Form", desc: "Provide your vehicle and driver information in our secure online form", icon: "📝" },
                 { step: 2, title: "Get Instant Quote", desc: "Receive your personalized insurance quote immediately", icon: "⚡" },
@@ -395,12 +395,12 @@ export default function Landing() {
                 { step: 4, title: "Get Covered", desc: "Start driving with confidence knowing you're fully protected", icon: "🚗" }
               ].map((item, index) => (
                 <div key={index} className="text-center relative">
-                  <div className="w-16 h-16 bg-ford-blue text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg transform hover:scale-125 transition-all duration-300 hover:rotate-12 relative z-10">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-ford-blue text-white rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold mx-auto mb-3 sm:mb-4 shadow-lg transform hover:scale-125 transition-all duration-300 hover:rotate-12 relative z-10">
                     {item.step}
                   </div>
-                  <div className="text-4xl mb-3">{item.icon}</div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">{item.title}</h3>
-                  <p className="text-gray-600 text-sm">{item.desc}</p>
+                  <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">{item.icon}</div>
+                  <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-800 mb-1 sm:mb-2 px-2">{item.title}</h3>
+                  <p className="text-gray-600 text-xs sm:text-sm px-2">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -438,32 +438,32 @@ export default function Landing() {
       </div>
 
       {/* CTA Section with Animation */}
-      <div className="py-20 px-4 bg-gradient-to-r from-ford-blue to-ford-lightblue text-white relative overflow-hidden">
+      <div className="py-12 sm:py-16 md:py-20 px-4 bg-gradient-to-r from-ford-blue to-ford-lightblue text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 left-0 w-full h-full gradient-shimmer"></div>
         </div>
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-fadeInUp">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 animate-fadeInUp px-2">
             Ready to Get Started?
           </h2>
-          <p className="text-xl mb-10 text-white/90">
+          <p className="text-base sm:text-lg md:text-xl mb-8 sm:mb-10 text-white/90 px-4">
             Join thousands of satisfied Canadian drivers who trust DUUO for their insurance needs
           </p>
           <button
             onClick={() => navigate('/consent')}
-            className="bg-white text-ford-blue hover:bg-gray-100 font-bold py-4 px-12 rounded-lg transition-all duration-300 transform hover:scale-110 shadow-2xl text-lg group"
+            className="bg-white text-ford-blue hover:bg-gray-100 font-bold py-3 px-8 sm:py-4 sm:px-12 rounded-lg transition-all duration-300 transform hover:scale-110 shadow-2xl text-base sm:text-lg group"
           >
             Get Your Free Quote Now
             <span className="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-2">→</span>
           </button>
-          <p className="text-sm mt-6 text-white/80">✓ No obligations  ✓ Takes 2 minutes  ✓ 100% secure</p>
+          <p className="text-xs sm:text-sm mt-4 sm:mt-6 text-white/80 px-2">✓ No obligations  ✓ Takes 2 minutes  ✓ 100% secure</p>
         </div>
       </div>
 
       {/* Footer */}
-      <div className="bg-ford-darkblue text-white py-12 px-4">
+      <div className="bg-ford-darkblue text-white py-8 sm:py-10 md:py-12 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
+          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
             <div>
               <h3 className="text-2xl font-bold mb-4">DUUO</h3>
               <p className="text-white/80">
