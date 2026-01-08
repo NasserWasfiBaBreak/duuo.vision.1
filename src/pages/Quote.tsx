@@ -135,7 +135,7 @@ export default function Quote() {
     }
   };
 
-  const fetchDrivingRecord = (licenseNumber: string) => {
+  const fetchDrivingRecord = (_licenseNumber: string) => {
     setDrivingRecord(prev => ({ ...prev, isLoading: true }));
 
     // Simulate API call with 2 second delay
@@ -158,7 +158,7 @@ export default function Quote() {
     }, 2000);
   };
 
-  const lookupVehicleByVin = (vin: string) => {
+  const lookupVehicleByVin = (_vin: string) => {
     setIsLookingUpVin(true);
 
     // Simulate VIN lookup API call

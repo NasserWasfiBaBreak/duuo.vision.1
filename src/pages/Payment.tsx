@@ -1,6 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import type { QuoteData } from '../types/quote';
 
 export default function Payment() {
   const location = useLocation();

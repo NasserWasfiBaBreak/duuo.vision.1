@@ -1,5 +1,4 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import type { QuoteData } from '../types/quote';
 import { useEffect, useState } from 'react';
 
 export default function Checkout() {
