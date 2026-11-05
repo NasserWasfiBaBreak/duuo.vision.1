@@ -231,6 +231,24 @@ export default function LicenseScanner({
             />
           </label>
 
+          {/* capture opens the camera directly on phones, so saved photos need their own input. */}
+          {isTouchDevice && (
+            <label
+              className={`mt-3 block w-full rounded-lg border-2 border-ford-blue bg-white px-6 py-3 text-center font-semibold text-ford-blue ${
+                isReadingPhoto ? 'opacity-60' : 'cursor-pointer hover:bg-gray-50'
+              }`}
+            >
+              Upload a saved photo
+              <input
+                type="file"
+                accept="image/*"
+                className="sr-only"
+                disabled={isReadingPhoto}
+                onChange={(event) => void handlePhotoSelected(event)}
+              />
+            </label>
+          )}
+
           {error && (
             <div role="alert" className="mt-4 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800">
               {error}
