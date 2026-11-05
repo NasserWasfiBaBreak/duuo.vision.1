@@ -62,6 +62,15 @@ const DEDUCTIBLE_OPTIONS = [
   { value: '2500', label: '$2,500' },
 ];
 
+const MIN_LICENSE_NUMBER_LENGTH = 5;
+
+// A record lookup needs these details, so a change to any of them means checking again.
+function getRecordCheckKey({ firstName, lastName, dateOfBirth, licenseNumber }: QuoteData) {
+  const details = [firstName, lastName, dateOfBirth, licenseNumber].map((value) => value.trim());
+  const isComplete = details.every(Boolean) && details[3].length >= MIN_LICENSE_NUMBER_LENGTH;
+  return isComplete ? details.join('|') : '';
+}
+
 export default function Quote() {
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
@@ -74,18 +83,43 @@ export default function Quote() {
     claims: Array<{ date: string; type: string; amount: string }>;
     violations: Array<{ date: string; type: string; points: number }>;
     suspensions: Array<{ date: string; reason: string; duration: string }>;
-    isLoading: boolean;
     isLoaded: boolean;
   }>({
     claims: [],
     violations: [],
     suspensions: [],
-    isLoading: false,
     isLoaded: false,
   });
+  const [checkedRecordKey, setCheckedRecordKey] = useState('');
+  const [isRecordManual, setIsRecordManual] = useState(false);
   const [vehicleEntryMethod, setVehicleEntryMethod] = useState<'vin' | 'manual' | null>(null);
   const [isLookingUpVin, setIsLookingUpVin] = useState(false);
   const [vehicleLoadedFromVin, setVehicleLoadedFromVin] = useState(false);
+
+  const recordCheckKey = getRecordCheckKey(formData);
+  const isCheckingRecord = recordCheckKey !== '' && recordCheckKey !== checkedRecordKey && !isRecordManual;
+
+  useEffect(() => {
+    if (!isCheckingRecord) return;
+
+    // Simulated lookup. Each edit restarts the timer, so it only finishes once typing pauses.
+    const lookup = setTimeout(() => {
+      setDrivingRecord({
+        claims: [
+          { date: '2023-03-15', type: 'Minor Collision', amount: '$3,200' },
+          { date: '2021-08-22', type: 'Windshield Damage', amount: '$850' },
+        ],
+        violations: [
+          { date: '2024-01-10', type: 'Speeding (15 km/h over)', points: 3 },
+        ],
+        suspensions: [],
+        isLoaded: true,
+      });
+      setCheckedRecordKey(recordCheckKey);
+    }, 2000);
+
+    return () => clearTimeout(lookup);
+  }, [isCheckingRecord, recordCheckKey]);
 
   useEffect(() => {
     // Scroll to top when component mounts
@@ -146,29 +180,6 @@ export default function Quote() {
     } else {
       setEntryMethod(null);
     }
-  };
-
-  const fetchDrivingRecord = (_licenseNumber: string) => {
-    setDrivingRecord(prev => ({ ...prev, isLoading: true }));
-
-    // Simulate API call with 2 second delay
-    setTimeout(() => {
-      // Simulate response based on license number
-      const mockRecord = {
-        claims: [
-          { date: '2023-03-15', type: 'Minor Collision', amount: '$3,200' },
-          { date: '2021-08-22', type: 'Windshield Damage', amount: '$850' },
-        ],
-        violations: [
-          { date: '2024-01-10', type: 'Speeding (15 km/h over)', points: 3 },
-        ],
-        suspensions: [],
-        isLoading: false,
-        isLoaded: true,
-      };
-
-      setDrivingRecord(mockRecord);
-    }, 2000);
   };
 
   const lookupVehicleByVin = (_vin: string) => {
@@ -428,9 +439,10 @@ export default function Quote() {
                             claims: [],
                             violations: [],
                             suspensions: [],
-                            isLoading: false,
                             isLoaded: false,
                           });
+                          setCheckedRecordKey('');
+                          setIsRecordManual(false);
                         }}
                         className="text-ford-blue hover:text-ford-darkblue text-sm font-medium inline-flex items-center gap-1"
                       >
@@ -565,27 +577,27 @@ export default function Quote() {
                         <h3 className="text-xl font-semibold text-gray-800">
                           Driving Record
                         </h3>
-                        {!drivingRecord.isLoaded && !drivingRecord.isLoading && (
-                          <div className="flex gap-2">
-                            <button
-                              type="button"
-                              onClick={() => fetchDrivingRecord(formData.licenseNumber)}
-                              className="px-4 py-2 bg-ford-blue text-white rounded-lg hover:bg-ford-darkblue transition-colors text-sm font-semibold"
-                            >
-                              Auto-Check Record
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => setDrivingRecord(prev => ({ ...prev, isLoaded: true }))}
-                              className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors text-sm font-semibold"
-                            >
-                              Enter Manually
-                            </button>
-                          </div>
+                        {!drivingRecord.isLoaded && !isCheckingRecord && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setIsRecordManual(true);
+                              setDrivingRecord(prev => ({ ...prev, isLoaded: true }));
+                            }}
+                            className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors text-sm font-semibold"
+                          >
+                            Enter Manually
+                          </button>
                         )}
                       </div>
 
-                      {drivingRecord.isLoading && (
+                      {!drivingRecord.isLoaded && !isCheckingRecord && (
+                        <p className="text-sm text-gray-600">
+                          We&apos;ll check your record automatically once your name, date of birth and license number are filled in.
+                        </p>
+                      )}
+
+                      {isCheckingRecord && (
                         <div className="bg-blue-50 border border-ford-lightblue rounded-xl p-6 text-center">
                           <div className="flex items-center justify-center gap-3">
                             <div className="w-6 h-6 border-3 border-ford-lightblue border-t-ford-blue rounded-full animate-spin"></div>
@@ -594,7 +606,7 @@ export default function Quote() {
                         </div>
                       )}
 
-                      {drivingRecord.isLoaded && (
+                      {drivingRecord.isLoaded && !isCheckingRecord && (
                         <div className="space-y-4">
                           <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
                               {/* Previous Claims */}
