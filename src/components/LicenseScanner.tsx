@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ChangeEvent } from 'react';
 import type { BarcodeScanner as DynamsoftBarcodeScanner } from 'dynamsoft-barcode-reader-bundle';
 import { parseAamvaLicense } from '../lib/aamvaLicense';
+import { openPhoneScanLink } from '../lib/phoneScanLink';
 import type { QuoteData } from '../types/quote';
 
 type DynamsoftBundle = typeof import('dynamsoft-barcode-reader-bundle');
@@ -9,15 +10,14 @@ let dynamsoftInitialization: Promise<void> | null = null;
 
 interface LicenseScannerProps {
   onCancel: () => void;
-  onUseManualEntry: () => void;
+  onUseManualEntry?: () => void;
   onLicenseRead: (licenseData: Partial<QuoteData>) => void;
+  privacyNote?: string;
 }
 
 const licenseKey = import.meta.env.VITE_DYNAMSOFT_LICENSE_KEY;
-// Starts at consent because the phone is a new session. The scanner is the first quote step, so nothing is lost.
 const isLocalhost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
 const phoneOrigin = (isLocalhost && import.meta.env.VITE_DEV_PHONE_ORIGIN) || window.location.origin;
-const phoneUrl = `${phoneOrigin}${import.meta.env.BASE_URL}#/consent`;
 const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
 const photoTemplate = 'ReadBarcodes_ReadRateFirst';
 
@@ -47,6 +47,7 @@ export default function LicenseScanner({
   onCancel,
   onUseManualEntry,
   onLicenseRead,
+  privacyNote = 'Your license data is processed in this browser and is not stored by the scanner.',
 }: LicenseScannerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const scannerRef = useRef<DynamsoftBarcodeScanner | null>(null);
@@ -95,19 +96,31 @@ export default function LicenseScanner({
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
     let active = true;
-    void import('qrcode')
-      .then(({ toDataURL }) => toDataURL(phoneUrl, { margin: 1, width: 224 }))
-      .then((qrCode) => {
-        if (active) setPhoneQrCode(qrCode);
-      })
-      .catch(() => {
-        // The QR code is optional, so the camera and upload options still work without it.
-      });
+    let closePhoneLink: (() => void) | undefined;
+
+    const showPhoneQrCode = async () => {
+      const { sessionId, close } = await openPhoneScanLink(onLicenseRead);
+      closePhoneLink = close;
+      if (!active) {
+        close();
+        return;
+      }
+
+      const { toDataURL } = await import('qrcode');
+      const phoneUrl = `${phoneOrigin}${import.meta.env.BASE_URL}#/phone-scan/${sessionId}`;
+      const qrCode = await toDataURL(phoneUrl, { margin: 1, width: 224 });
+      if (active) setPhoneQrCode(qrCode);
+    };
+
+    showPhoneQrCode().catch(() => {
+      // The QR code is optional, so the camera and upload options still work without it.
+    });
 
     return () => {
       active = false;
+      closePhoneLink?.();
     };
-  }, []);
+  }, [onLicenseRead]);
 
   useEffect(() => {
     let active = true;
@@ -265,24 +278,26 @@ export default function LicenseScanner({
               <div>
                 <p className="font-semibold text-gray-800">Scanning is easier on your phone</p>
                 <p className="mt-1 text-sm text-gray-600">
-                  Laptop cameras often can&apos;t focus on the barcode. Scan this code with your phone to continue there.
+                  Laptop cameras often can&apos;t focus on the barcode. Scan this code with your phone, then scan your license there. This form fills in automatically.
                 </p>
               </div>
             </div>
           )}
 
 
-          <div className="mt-4 flex justify-center">
-            <button
-              type="button"
-              onClick={onUseManualEntry}
-              className="text-ford-blue font-semibold hover:underline"
-            >
-              Enter information manually instead
-            </button>
-          </div>
+          {onUseManualEntry && (
+            <div className="mt-4 flex justify-center">
+              <button
+                type="button"
+                onClick={onUseManualEntry}
+                className="text-ford-blue font-semibold hover:underline"
+              >
+                Enter information manually instead
+              </button>
+            </div>
+          )}
           <p className="text-center mt-4 text-xs text-gray-500">
-            Your license data is processed in this browser and is not stored by the scanner.
+            {privacyNote}
           </p>
         </div>
       </main>
