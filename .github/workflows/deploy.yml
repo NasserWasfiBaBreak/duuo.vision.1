@@ -26,6 +26,8 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          VITE_DYNAMSOFT_LICENSE_KEY: ${{ secrets.VITE_DYNAMSOFT_LICENSE_KEY }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
