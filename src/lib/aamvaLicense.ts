@@ -63,6 +63,12 @@ function formatAamvaDate(value: string) {
   return undefined;
 }
 
+// Barcodes can pad postal codes, so keep only the standard "A1A 1A1" part.
+function formatPostalCode(value: string) {
+  const match = value.toUpperCase().replace(/[^A-Z0-9]/g, '').match(/^([A-Z]\d[A-Z])(\d[A-Z]\d)/);
+  return match ? `${match[1]} ${match[2]}` : value;
+}
+
 export function parseAamvaLicense(barcodeText: string): Partial<QuoteData> | null {
   const fields = getAamvaFields(barcodeText);
   const parsed: Partial<QuoteData> = {};
@@ -85,7 +91,7 @@ export function parseAamvaLicense(barcodeText: string): Partial<QuoteData> | nul
   if (address) parsed.address = address;
   if (city) parsed.city = city;
   if (province && CANADIAN_PROVINCE_CODES.has(province)) parsed.province = province;
-  if (postalCode) parsed.postalCode = postalCode;
+  if (postalCode) parsed.postalCode = formatPostalCode(postalCode);
   if (licenseClass) {
     parsed.licenseClass = ['G', 'G1', 'G2'].includes(licenseClass) ? licenseClass : 'Other';
   }

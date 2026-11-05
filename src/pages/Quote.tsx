@@ -67,6 +67,7 @@ export default function Quote() {
   const [scrolled, setScrolled] = useState(false);
   const [entryMethod, setEntryMethod] = useState<'scan' | 'manual' | null>(null);
   const [isScanning, setIsScanning] = useState(false);
+  const [formError, setFormError] = useState('');
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<QuoteData>(initialQuoteData);
   const [drivingRecord, setDrivingRecord] = useState<{
@@ -111,8 +112,20 @@ export default function Quote() {
     }));
   };
 
-  const handleNext = (e: React.FormEvent) => {
+  const handleNext = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Long forms can hide the browser's validation message, so show it next to the button instead.
+    const form = e.currentTarget;
+    const invalidField = form.querySelector<HTMLInputElement | HTMLSelectElement>(':invalid');
+    if (invalidField) {
+      const label = form.querySelector(`label[for="${invalidField.id}"]`)?.textContent?.replace('*', '').trim();
+      setFormError(`${label ?? 'A field'}: ${invalidField.validationMessage}`);
+      invalidField.scrollIntoView({ block: 'center' });
+      invalidField.focus({ preventScroll: true });
+      return;
+    }
+    setFormError('');
 
     // If on VIN lookup screen, trigger VIN lookup instead of moving to next step
     if (currentStep === 2 && vehicleEntryMethod === 'vin' && !formData.vehicleYear) {
@@ -399,7 +412,7 @@ export default function Quote() {
               stepLabels={stepLabels}
             />
 
-            <form onSubmit={handleNext}>
+            <form onSubmit={handleNext} onChange={() => setFormError('')} noValidate>
               {/* Step 1: Personal Information & Address */}
               {currentStep === 1 && (
                 <div>
@@ -1152,6 +1165,12 @@ export default function Quote() {
                       Final rates may vary based on additional underwriting review.
                     </p>
                   </div>
+                </div>
+              )}
+
+              {formError && (
+                <div role="alert" className="mt-8 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800">
+                  {formError}
                 </div>
               )}
 
