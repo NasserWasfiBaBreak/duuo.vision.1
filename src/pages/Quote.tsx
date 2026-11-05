@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { QuoteData } from '../types/quote';
 import { initialQuoteData } from '../types/quote';
 import ProgressBar from '../components/ProgressBar';
+import LicenseScanner from '../components/LicenseScanner';
 import InputField from '../components/InputField';
 import SelectField from '../components/SelectField';
 
@@ -66,7 +67,6 @@ export default function Quote() {
   const [scrolled, setScrolled] = useState(false);
   const [entryMethod, setEntryMethod] = useState<'scan' | 'manual' | null>(null);
   const [isScanning, setIsScanning] = useState(false);
-  const [scanProgress, setScanProgress] = useState(0);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<QuoteData>(initialQuoteData);
   const [drivingRecord, setDrivingRecord] = useState<{
@@ -175,215 +175,24 @@ export default function Quote() {
     }, 2000);
   };
 
-  const handleScanLicense = () => {
-    setIsScanning(true);
-    setScanProgress(0);
-
-    // Simulate scanning progress
-    const progressInterval = setInterval(() => {
-      setScanProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(progressInterval);
-          return 100;
-        }
-        return prev + 2;
-      });
-    }, 30);
-
-    // After scan completes, fill form with placeholder data
-    setTimeout(() => {
-      const licenseNum = 'S1234-56789-01234';
-      setFormData({
-        firstName: 'John',
-        lastName: 'Smith',
-        dateOfBirth: '1990-05-15',
-        email: 'john.smith@email.com',
-        phone: '(416) 555-0123',
-        address: '123 Main Street',
-        city: 'Toronto',
-        province: 'ON',
-        postalCode: 'M5V 3A8',
-        licenseNumber: licenseNum,
-        licenseClass: 'G',
-        yearsLicensed: '8',
-        vehicleYear: '2020',
-        vehicleMake: 'Ford',
-        vehicleModel: 'F-150',
-        vin: '1FTFW1E84LFA12345',
-        primaryUse: 'commute',
-        annualKilometers: '10000-15000',
-        parkingLocation: 'garage',
-        coverageType: 'full',
-        deductible: '500',
-      });
-      setIsScanning(false);
-      setEntryMethod('manual');
-      // Fetch driving record after form is filled
-      fetchDrivingRecord(licenseNum);
-    }, 3000);
-  };
+  const handleScanLicense = () => setIsScanning(true);
+  const handleLicenseRead = useCallback((licenseData: Partial<QuoteData>) => {
+    setFormData((previous) => ({ ...previous, ...licenseData }));
+    setIsScanning(false);
+    setEntryMethod('manual');
+  }, []);
 
   // Scanner Screen
   if (isScanning) {
     return (
-      <div className="h-screen flex flex-col bg-gradient-to-br from-gray-50 to-white overflow-hidden">
-        {/* Floating Navigation Bar */}
-        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'bg-white shadow-lg py-4' : 'bg-white/95 backdrop-blur-sm shadow-md py-4'
-        }`}>
-          <div className="max-w-6xl mx-auto px-4 flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-ford-blue cursor-pointer" onClick={() => navigate('/')}>
-              DUUO
-            </h1>
-            <button
-              onClick={() => {
-                setIsScanning(false);
-                setScanProgress(0);
-              }}
-              className="px-6 py-2 rounded-lg font-semibold transition-all duration-300 bg-gray-100 text-gray-700 hover:bg-gray-200"
-            >
-              Cancel
-            </button>
-          </div>
-        </nav>
-
-        {/* Scanner Interface */}
-        <div className="flex-1 pt-20 pb-4 px-4 flex items-center justify-center overflow-hidden">
-          <div className="max-w-2xl w-full h-full flex flex-col justify-center py-4">
-            <div className="text-center mb-4 animate-fadeInUp flex-shrink-0">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
-                Scanning Driver's License
-              </h2>
-              <div className="h-1 w-24 bg-ford-blue mx-auto mb-2"></div>
-              <p className="text-gray-600">Please hold your license steady in the frame</p>
-            </div>
-
-            {/* Scanner Frame */}
-            <div className="bg-white rounded-2xl shadow-2xl p-4 md:p-6 animate-fadeInUp flex-shrink-0" style={{ animationDelay: '0.2s' }}>
-              {/* Scanner Viewfinder */}
-              <div className="relative bg-gray-900 rounded-xl overflow-hidden aspect-[16/10] mb-3">
-                {/* Scanning Line Animation */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-full h-full relative">
-                    {/* Background pattern */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-800 to-transparent opacity-50"></div>
-
-                    {/* License Card Outline */}
-                    <div className="absolute inset-0 flex items-center justify-center p-6 md:p-8">
-                      <div className="border-4 border-dashed border-ford-lightblue rounded-lg w-full max-w-md aspect-[1.6/1] relative">
-                        {/* Corner markers */}
-                        <div className="absolute -top-1 -left-1 w-6 h-6 md:w-8 md:h-8 border-t-4 border-l-4 border-ford-blue"></div>
-                        <div className="absolute -top-1 -right-1 w-6 h-6 md:w-8 md:h-8 border-t-4 border-r-4 border-ford-blue"></div>
-                        <div className="absolute -bottom-1 -left-1 w-6 h-6 md:w-8 md:h-8 border-b-4 border-l-4 border-ford-blue"></div>
-                        <div className="absolute -bottom-1 -right-1 w-6 h-6 md:w-8 md:h-8 border-b-4 border-r-4 border-ford-blue"></div>
-
-                        {/* Scanning line */}
-                        <div
-                          className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-ford-lightblue to-transparent transition-all duration-300"
-                          style={{ top: `${scanProgress}%`, boxShadow: '0 0 20px rgba(45, 150, 205, 0.8)' }}
-                        ></div>
-                      </div>
-                    </div>
-
-                    {/* Camera icon */}
-                    <div className="absolute top-3 left-3">
-                      <div className="w-10 h-10 md:w-12 md:h-12 bg-ford-blue/30 rounded-full flex items-center justify-center backdrop-blur-sm">
-                        <svg className="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Progress Bar */}
-              <div className="mb-3">
-                <div className="flex justify-between items-center mb-1">
-                  <span className="text-xs font-semibold text-gray-700">Scanning Progress</span>
-                  <span className="text-xs font-bold text-ford-blue">{Math.round(scanProgress)}%</span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-                  <div
-                    className="bg-gradient-to-r from-ford-blue to-ford-lightblue h-full rounded-full transition-all duration-300 ease-out"
-                    style={{ width: `${scanProgress}%` }}
-                  ></div>
-                </div>
-              </div>
-
-              {/* Status Messages */}
-              <div className="space-y-2 mb-3">
-                <div className="flex items-center gap-2 text-gray-700">
-                  <div className={`flex-shrink-0 ${scanProgress > 20 ? 'text-green-500' : 'text-gray-400'}`}>
-                    {scanProgress > 20 ? (
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                    ) : (
-                      <div className="w-5 h-5 border-2 border-gray-300 border-t-ford-blue rounded-full animate-spin"></div>
-                    )}
-                  </div>
-                  <span className="text-xs">Detecting license format...</span>
-                </div>
-
-                <div className="flex items-center gap-2 text-gray-700">
-                  <div className={`flex-shrink-0 ${scanProgress > 50 ? 'text-green-500' : 'text-gray-400'}`}>
-                    {scanProgress > 50 ? (
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                    ) : scanProgress > 20 ? (
-                      <div className="w-5 h-5 border-2 border-gray-300 border-t-ford-blue rounded-full animate-spin"></div>
-                    ) : (
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12z" clipRule="evenodd" />
-                      </svg>
-                    )}
-                  </div>
-                  <span className="text-xs">Reading barcode data...</span>
-                </div>
-
-                <div className="flex items-center gap-2 text-gray-700">
-                  <div className={`flex-shrink-0 ${scanProgress > 80 ? 'text-green-500' : 'text-gray-400'}`}>
-                    {scanProgress > 80 ? (
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                    ) : scanProgress > 50 ? (
-                      <div className="w-5 h-5 border-2 border-gray-300 border-t-ford-blue rounded-full animate-spin"></div>
-                    ) : (
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12z" clipRule="evenodd" />
-                      </svg>
-                    )}
-                  </div>
-                  <span className="text-xs">Verifying information...</span>
-                </div>
-              </div>
-
-              {/* Success message at 100% */}
-              {scanProgress === 100 && (
-                <div className="bg-green-50 border-l-4 border-green-500 p-2.5 rounded animate-fadeIn">
-                  <div className="flex items-center gap-2">
-                    <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <div>
-                      <p className="font-semibold text-green-800 text-xs">Scan Complete!</p>
-                      <p className="text-xs text-green-700">Information extracted successfully.</p>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <div className="text-center mt-3 text-xs text-gray-500 animate-fadeInUp flex-shrink-0" style={{ animationDelay: '0.4s' }}>
-              <p>🔒 Your license data is processed securely and not stored</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <LicenseScanner
+        onCancel={() => setIsScanning(false)}
+        onUseManualEntry={() => {
+          setIsScanning(false);
+          setEntryMethod('manual');
+        }}
+        onLicenseRead={handleLicenseRead}
+      />
     );
   }
 

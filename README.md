@@ -72,3 +72,7 @@ export default defineConfig([
 ])
 ```
 # duuo.vision.1
+
+## Driver's license scanning
+
+The quote flow uses Dynamsoft Barcode Reader to scan the PDF417 barcode on a driver's license. Configure `VITE_DYNAMSOFT_LICENSE_KEY` in the environment used to build the app. For local development, copy `.env.example` to `.env.local` and add the license key there; do not commit license keys. Production camera access requires HTTPS (localhost is also supported).
