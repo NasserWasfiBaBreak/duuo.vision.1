@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "dynamsoft-barcode-reader-bundle": "11.6.5000",
-    "peerjs": "^1.5.5",
     "qrcode": "^1.5.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

@@ -5,7 +5,7 @@ import { sendLicenseToLaptop } from '../lib/phoneScanLink';
 import type { QuoteData } from '../types/quote';
 
 export default function PhoneScan() {
-  const { sessionId = '' } = useParams();
+  const { sessionId = '', encodedKey = '' } = useParams();
   const navigate = useNavigate();
   const [licenseData, setLicenseData] = useState<Partial<QuoteData> | null>(null);
   const [sendState, setSendState] = useState<'sending' | 'sent' | 'failed'>('sending');
@@ -14,19 +14,19 @@ export default function PhoneScan() {
     setLicenseData(scannedLicense);
     setSendState('sending');
     try {
-      await sendLicenseToLaptop(sessionId, scannedLicense);
+      await sendLicenseToLaptop(sessionId, encodedKey, scannedLicense);
       setSendState('sent');
     } catch {
       setSendState('failed');
     }
-  }, [sessionId]);
+  }, [sessionId, encodedKey]);
 
   if (!licenseData) {
     return (
       <LicenseScanner
         onCancel={() => navigate('/')}
         onLicenseRead={sendLicense}
-        privacyNote="Your license is read on this phone and sent directly to your laptop."
+        privacyNote="Your license is read on this phone and sent to your laptop encrypted."
       />
     );
   }

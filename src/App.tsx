@@ -14,7 +14,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/consent" element={<Consent />} />
         <Route path="/quote" element={<Quote />} />
-        <Route path="/phone-scan/:sessionId" element={<PhoneScan />} />
+        <Route path="/phone-scan/:sessionId/:encodedKey" element={<PhoneScan />} />
         <Route path="/summary" element={<Summary />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/checkout" element={<Checkout />} />

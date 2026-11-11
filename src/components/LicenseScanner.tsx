@@ -99,7 +99,7 @@ export default function LicenseScanner({
     let closePhoneLink: (() => void) | undefined;
 
     const showPhoneQrCode = async () => {
-      const { sessionId, close } = await openPhoneScanLink(onLicenseRead);
+      const { sessionPath, close } = await openPhoneScanLink(onLicenseRead);
       closePhoneLink = close;
       if (!active) {
         close();
@@ -107,7 +107,7 @@ export default function LicenseScanner({
       }
 
       const { toDataURL } = await import('qrcode');
-      const phoneUrl = `${phoneOrigin}${import.meta.env.BASE_URL}#/phone-scan/${sessionId}`;
+      const phoneUrl = `${phoneOrigin}${import.meta.env.BASE_URL}#/phone-scan/${sessionPath}`;
       const qrCode = await toDataURL(phoneUrl, { margin: 1, width: 224 });
       if (active) setPhoneQrCode(qrCode);
     };
